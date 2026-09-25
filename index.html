@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a3d20">
+  <meta name="description" content="Temer Properties — smart real estate in Ethiopia.">
+  <title>Temer Properties | Smart Real Estate • Ethiopia</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#home" aria-label="Temer Properties home">
+    <span class="brand-mark">✦</span>
+    <span><strong>Temer</strong><small>PROPERTIES</small></span>
+  </a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a class="active" href="#home">Home</a>
+    <a href="#properties">Properties</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#team">Our Team</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="header-actions">
+    <button class="lang" type="button" onclick="toggleLang()">EN | አማ</button>
+    <a class="gold-btn small" href="#contact">Contact Us</a>
+    <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<div id="mobileMenu" class="mobile-menu">
+  <a href="#home">Home</a><a href="#properties">Properties</a><a href="#projects">Projects</a>
+  <a href="#about">About</a><a href="#team">Our Team</a><a href="#contact">Contact</a>
+</div>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-copy">
+    <div class="eyebrow">CREATE <span>|</span> CONSTRUCT <span>|</span> DELIVER</div>
+    <h1>Find Your<br>Perfect Property<br><em>in Ethiopia</em></h1>
+    <p>Premium residential and investment properties in prime locations.</p>
+
+    <div class="search-panel">
+      <div class="search-tabs">
+        <button class="tab active" data-mode="Buy">Buy</button>
+        <button class="tab" data-mode="Rent">Rent</button>
+        <button class="tab" data-mode="Off-Plan">Off-Plan</button>
+        <button class="tab" data-mode="Projects">Projects</button>
+      </div>
+      <div class="smart-search">
+        <input id="searchInput" type="search" placeholder="Search properties... e.g. 3 bedroom in Bole under 15 million">
+        <button class="gold-btn" onclick="runSearch()">Search</button>
+      </div>
+      <div class="filters">
+        <label>Location<select id="location"><option>Any Location</option><option>Bole</option><option>CMC</option><option>Kera</option><option>Summit</option><option>Gelan</option></select></label>
+        <label>Property Type<select id="type"><option>Any Type</option><option>Apartment</option><option>House</option><option>Villa</option><option>Commercial</option><option>Land</option></select></label>
+        <label>Bedrooms<select id="beds"><option>Any</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></label>
+        <label>Price Range<select id="price"><option>Any Price</option><option>Under 10M</option><option>10M–20M</option><option>20M+</option></select></label>
+      </div>
+      <p id="searchResult" class="search-result" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="agent-card">
+    <div class="agent-photo"><img src="assets/mahlet-ademe.jpg" alt="Mahlet Ademe"></div>
+    <div class="agent-info">
+      <h2>Mahlet Ademe</h2>
+      <p>Sales Officer</p>
+      <p>Member of: Ajwa Wing</p>
+      <div class="agent-location">📍 Sarbet to Kera Road,<br>Woldemaryam Building</div>
+      <a class="gold-btn" href="#contact">Contact Mahlet</a>
+      <div class="quick-links"><a href="https://wa.me/" aria-label="WhatsApp">◉</a><a href="tel:+251900000000">☎</a><a href="mailto:info@temerproperties.com">✉</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div><span>⌖</span><b>Prime Locations</b><small>Across Ethiopia</small></div>
+  <div><span>♢</span><b>Trusted Developer</b><small>Quality you can rely on</small></div>
+  <div><span>⌂</span><b>Modern Living</b><small>Designed for your lifestyle</small></div>
+  <div><span>↗</span><b>Investment Opportunities</b><small>High growth potential</small></div>
+</section>
+
+<section id="properties" class="section">
+  <div class="section-heading"><div><span class="eyebrow dark">SMART PROPERTY SEARCH</span><h2>Featured Properties</h2></div><a class="outline-btn" href="#properties">View All Properties →</a></div>
+  <div id="propertyGrid" class="property-grid"></div>
+</section>
+
+
+<section id="featured-project" class="featured-project section">
+  <div class="featured-project-image">
+    <img src="assets/megenagna-chaka-project.jpg" alt="Megenagna Chaka residential project">
+  </div>
+  <div class="featured-project-copy">
+    <span class="eyebrow dark">FEATURED PROJECT • መገናኛ ጫካ</span>
+    <h2>መገናኛ ጫካ ፕሮጀክት</h2>
+    <p class="amharic">ከየካ ክፍለ ከተማ ጀርባ</p>
+
+    <div class="price-bands">
+      <div><b>7ኛ–10ኛ ፎቅ</b><strong>130,000 ብር</strong></div>
+      <div><b>11ኛ–14ኛ ፎቅ</b><strong>125,000 ብር</strong></div>
+      <div><b>15ኛ–23ኛ ፎቅ</b><strong>130,000 ብር</strong></div>
+    </div>
+
+    <div class="unit-types">
+      <div><h3>ባለ 1 መኝታ</h3><p>60 ካሬ • 69 ካሬ • 71 ካሬ</p></div>
+      <div><h3>ባለ 2 መኝታ</h3><p>90 • 96 • 100 • 103 • 105 ካሬ</p></div>
+      <div><h3>ባለ 3 መኝታ</h3><p>112 • 118 • 120 • 123 • 133 • 142 • 145 ካሬ</p></div>
+    </div>
+
+    <div class="payment-box">
+      <h3>የክፍያ እቅድ</h3>
+      <p><b>40% ውል ሲፈረም</b> — ቀሪውን ቤትዎን ሲረከቡ የሚከፈል፤ <b>10% ቅናሽ</b> አለው።</p>
+      <p><b>ቅድመ ክፍያ: 20%</b> — ቀሪው በሕንፃ ግንባታ ሂደት እስከ 3 ዓመት ይከፈላል።</p>
+    </div>
+
+    <div class="discounts">
+      <h3>የቅናሽ አማራጮች</h3>
+      <span>41%–64% → <b>25% ቅናሽ</b></span>
+      <span>65% → <b>35% ቅናሽ</b></span>
+    </div>
+
+    <a class="gold-btn" href="#contact">የፕሮጀክቱን መረጃ ይጠይቁ</a>
+  </div>
+</section>
+
+<section id="new-projects" class="section project-details-section">
+  <div class="section-heading"><div><span class="eyebrow dark">NEW PROJECTS • አዲስ ፕሮጀክቶች</span><h2>More Featured Sites</h2></div><a class="outline-btn" href="#contact">Enquire Now →</a></div>
+  <div class="details-grid">
+    <article class="detail-project-card">
+      <div class="detail-card-top"><span class="status-pill">NEW SITE</span><span>ሳር ቤት</span></div>
+      <h3>ሳር ቤት አደባባይ</h3>
+      <p class="location-line">ከአዳምስ ፓቪልዮንስ ጎን</p>
+      <div class="price-bands compact">
+        <div><b>7ኛ–10ኛ ፎቅ</b><strong>130,000 ብር</strong></div>
+        <div><b>11ኛ–14ኛ ፎቅ</b><strong>125,000 ብር</strong></div>
+        <div><b>15ኛ–23ኛ ፎቅ</b><strong>120,000 ብር</strong></div>
+      </div>
+      <div class="unit-list"><h4>ቤት አማራጮች</h4><p><b>1 መኝታ:</b> 73 • 93 ካሬ</p><p><b>2 መኝታ:</b> 102 • 112 • 132 ካሬ</p><p><b>3 መኝታ:</b> 134 • 144 • 151 • 162 • 168 • 175 ካሬ</p></div>
+      <div class="payment-box light"><h4>ክፍያ</h4><p><b>ቅድመ ክፍያ: 20%</b> — ቀሪው በሕንፃ ግንባታ ሂደት ቤትዎን እስከምረከቡ ይከፈላል።</p></div>
+      <div class="discounts"><h4>የቅናሽ አማራጮች</h4><span>30%–39% → <b>10% ቅናሽ</b></span><span>40%–49% → <b>15% ቅናሽ</b></span><span>50%–69% → <b>20% ቅናሽ</b></span><span>70% → <b>30% ቅናሽ</b></span></div>
+      <a class="gold-btn" href="#contact">ሳር ቤት መረጃ ይጠይቁ</a>
+    </article>
+
+    <article class="detail-project-card">
+      <div class="detail-card-top"><span class="status-pill">LOCATION</span><span>አዲስ አበባ</span></div>
+      <h3>አፍሪካ ህብረት ጀርባ</h3>
+      <p class="location-line">ከአፍሪካ ህብረት ጀርባ</p>
+      <div class="unit-list"><h4>ቤት አማራጮች</h4><p><b>1 መኝታ:</b> 68 • 72 • 81 ካሬ</p><p><b>2 መኝታ:</b> 81 • 87 • 90 • 101 ካሬ</p><p><b>3 መኝታ:</b> 121 • 137 • 142 ካሬ</p></div>
+      <div class="payment-box"><h4>ክፍያ እቅድ</h4><p><b>ቅድመ ክፍያ: 20%</b></p><p>ቀሪው በሕንፃ ግንባታ ሂደት ቤቱን እስክረከቡ ባለው በ <b>16 ዙር</b> የሚከፈል።</p></div>
+      <div class="discounts"><h4>የቅናሽ አማራጮች</h4><span>30%–39% → <b>10% ቅናሽ</b></span><span>40%–49% → <b>15% ቅናሽ</b></span><span>50%–69% → <b>20% ቅናሽ</b></span><span>70% → <b>30% ቅናሽ</b></span></div>
+      <a class="gold-btn" href="#contact">መረጃ ይጠይቁ</a>
+    </article>
+
+    <article class="detail-project-card">
+      <div class="detail-card-top"><span class="status-pill">NEARING COMPLETION</span><span>አያት 49</span></div>
+      <h3>አያት 49</h3>
+      <p class="location-line">በመጠናቀቅ ላይ የሚገኝ ሳይት</p>
+      <div class="unit-list"><h4>ቤት አማራጮች</h4><p><b>3 መኝታ:</b> 146 ካሬ • 180 ካሬ</p></div>
+      <div class="payment-box"><h4>ክፍያ እቅድ</h4><p><b>ቅድመ ክፍያ: 50%</b></p><p>ቀሪው በ <b>6 ወር</b> ጊዜ ውስጥ የቤት ቁልፍዎን እስከምረከቡ ባለው ይከፈላል።</p></div>
+      <div class="discounts"><h4>የቅናሽ አማራጭ</h4><span>100% ክፍያ → <b>15% ቅናሽ</b></span></div>
+      <a class="gold-btn" href="#contact">አያት 49 መረጃ ይጠይቁ</a>
+    </article>
+  </div>
+</section>
+
+<section id="shops" class="shops-section section">
+  <div class="shops-card">
+    <div><span class="eyebrow">COMMERCIAL • የሱቅ አማራጮች</span><h2>የሱቅ አማራጮች</h2><p>ለንግድ እና ለኢንቨስትመንት በተለያዩ ቁልፍ ቦታዎች የሚገኙ የሱቅ አማራጮች።</p></div>
+    <div class="shop-locations"><span>ፒያሳ ሚኒሊክ አደባባይ</span><span>ሳር ቤት አደባባይ — አዳምስ ፓቪልዮንስ ጎን</span><span>አፍሪካ ህብረት ጀርባ — ቡልጋርያ መብራት</span><span>ገላን</span></div>
+    <div class="shop-price"><div><small>ከ</small><strong>1.8 ሚሊዮን ብር</strong><small>ጀምሮ</small></div><div><small>ቅድመ ክፍያ</small><strong>ከ 450,000 ብር</strong><small>ጀምሮ</small></div></div>
+    <a class="gold-btn" href="#contact">የሱቅ መረጃ ይጠይቁ</a>
+  </div>
+</section>
+
+<section id="projects" class="section tinted">
+  <div class="section-heading"><div><span class="eyebrow dark">DEVELOPMENTS</span><h2>Latest Projects & Offers</h2></div><a class="gold-btn" href="#contact">Enquire About a Project</a></div>
+  <div class="project-grid">
+    <article class="project-card promo"><div class="project-art">35% <small>Special Offer</small></div><h3>2.7 ምርጥ ቦታ</h3><p>Addis Ababa • Special Offer</p><button onclick="notify('Project enquiry selected')">View Details</button></article>
+    <article class="project-card map-art"><div class="project-art">NEW SITES<br><span>LAUNCHED</span></div><h3>Aware • Sarbet • Gelan</h3><p>Addis Ababa • New Project</p><button onclick="notify('New sites enquiry selected')">View Details</button></article>
+    <article class="project-card building-art"><div class="project-art">TEMER<br>RESIDENCES</div><h3>5.7 ምርጥ ቦታ</h3><p>Addis Ababa • Apartments</p><button onclick="notify('Apartment project selected')">View Details</button></article>
+    <article class="project-card"><div class="project-art dark-art">SAR BET SITE<br><span>COMING SOON</span></div><h3>Sar Bet Site</h3><p>Addis Ababa • Upcoming</p><button onclick="notify('Coming-soon project selected')">View Details</button></article>
+  </div>
+</section>
+
+<section id="about" class="about section">
+  <div><span class="eyebrow dark">ABOUT TEMER</span><h2>Smart property search built for Ethiopia.</h2><p>Discover homes, apartments, commercial spaces and development opportunities with a clean, modern experience designed around the Ethiopian market.</p><div class="about-stats"><div><b>Prime</b><small>Locations</small></div><div><b>Smart</b><small>Search</small></div><div><b>Local</b><small>Support</small></div></div></div>
+  <div class="about-panel"><h3>Need help finding a property?</h3><p>Tell us what you are looking for and our team can help narrow down suitable options.</p><a class="gold-btn" href="#contact">Speak to Temer Properties</a></div>
+</section>
+
+<section id="team" class="agent-section section">
+  <div class="team-photo"><img src="assets/mahlet-ademe.jpg" alt="Mahlet Ademe"></div>
+  <div><span class="eyebrow dark">OUR TEAM</span><h2>Meet Mahlet Ademe</h2><h3>Sales Officer • Ajwa Wing</h3><p>Professional and personalised real-estate support for clients looking to buy, rent or explore investment opportunities.</p><ul><li>Residential sales</li><li>Apartment & house rentals</li><li>Investment opportunities</li><li>Client consultation</li></ul><a class="gold-btn" href="#contact">Contact Mahlet</a></div>
+</section>
+
+<section id="contact" class="contact section">
+  <div><span class="eyebrow dark">CONTACT</span><h2>Let's find your next property.</h2><p>Our office: Sarbet to Kera Road, Woldemaryam Building, Addis Ababa, Ethiopia.</p><p>Phone: +251 9XX XXX XXX<br>Email: info@temerproperties.com</p></div>
+  <form onsubmit="submitContact(event)">
+    <input required placeholder="Full Name" name="name">
+    <input required type="email" placeholder="Email Address" name="email">
+    <input placeholder="Phone Number" name="phone">
+    <select name="interest"><option>I'm interested in...</option><option>Buying</option><option>Renting</option><option>Off-Plan</option><option>Projects</option></select>
+    <textarea required placeholder="Tell us what you are looking for" name="message"></textarea>
+    <button class="gold-btn" type="submit">Send Message</button>
+    <p id="formMessage" class="form-message"></p>
+  </form>
+</section>
+</main>
+
+<footer><div class="brand"><span class="brand-mark">✦</span><span><strong>Temer</strong><small>PROPERTIES</small></span></div><p>CREATE | CONSTRUCT | DELIVER • Ethiopia</p><p>© 2026 Temer Properties</p></footer>
+
+<script src="app.js"></script>
+</body>
+</html>
