@@ -71,27 +71,50 @@ function submitContact(e){
 
 async function applyLiveSite(){
   try{
-    const r=await fetch('/api/site',{cache:'no-store'}); if(!r.ok) return; const d=await r.json();
+    const r=await fetch('/api/site?_=' + Date.now(), {cache:'no-store', headers:{'Cache-Control':'no-cache'}});
+    if(!r.ok) return;
+    const d=await r.json();
+    const cacheBust='?v=' + Date.now();
     const hero=document.querySelector('.hero');
     if(hero){
       let v=document.getElementById('heroBackgroundVideo');
       if(d.hero_video){
-        if(!v){ v=document.createElement('video'); v.id='heroBackgroundVideo'; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('aria-hidden','true'); hero.prepend(v); }
-        v.src=d.hero_video; v.style.display='block'; hero.style.backgroundImage='none';
-        const old=document.querySelector('.hero-image-live'); if(old) old.remove();
+        if(!v){
+          v=document.createElement('video');
+          v.id='heroBackgroundVideo';
+          v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true;
+          v.setAttribute('aria-hidden','true');
+          hero.prepend(v);
+        }
+        v.pause();
+        v.src=d.hero_video + (d.hero_video.includes('?')?'&':'?') + 'v=' + Date.now();
+        v.style.display='block';
+        hero.style.backgroundImage='none';
+        v.load();
+        v.play().catch(()=>{});
       } else {
-        if(v) v.style.display='none'; hero.style.backgroundImage=`url("${d.hero_image || 'assets/hero-background.jpg'}")`;
+        if(v){ v.pause(); v.removeAttribute('src'); v.load(); v.style.display='none'; }
+        hero.style.backgroundImage=`url("${(d.hero_image || 'assets/hero-background.jpg')}${(d.hero_image||'').includes('?')?'&':'?'}v=${Date.now()}")`;
       }
     }
-    const sales=document.querySelector('.agent-photo img'); if(sales && d.sales_officer_image) sales.src=d.sales_officer_image;
-    const meet=document.querySelector('.team-photo img'); if(meet && d.meet_mahlet_image) meet.src=d.meet_mahlet_image;
-    const featured=document.querySelector('.featured-project-image img'); if(featured && d.featured_image) featured.src=d.featured_image;
+    const setImg=(selector,url)=>{ const el=document.querySelector(selector); if(el&&url) el.src=url+(url.includes('?')?'&':'?')+'v='+Date.now(); };
+    setImg('.agent-photo img',d.sales_officer_image);
+    setImg('.team-photo img',d.meet_mahlet_image);
+    setImg('.featured-project-image img',d.featured_image);
     document.querySelectorAll('[data-live-phone]').forEach(el=>{el.textContent=d.phone; if(el.tagName==='A') el.href='tel:'+d.phone.replace(/\s/g,'');});
     document.querySelectorAll('[data-live-telegram]').forEach(el=>{el.textContent=d.telegram_user; if(el.tagName==='A') el.href=d.telegram;});
     if(d.investment_message){ const el=document.querySelector('[data-investment-message]'); if(el) el.textContent=d.investment_message; }
     if(d.diaspora_message){ const el=document.querySelector('[data-diaspora-message]'); if(el) el.textContent=d.diaspora_message; }
-    properties.forEach(p=>{ const key=(p.image||'').split('/').pop().replace(/^property-/, '').replace(/\.jpg$/,''); if(d.property_images && d.property_images[key]) p.image=d.property_images[key]; });
+    properties.forEach(p=>{
+      const file=(p.image||'').split('/').pop();
+      const key=file.replace(/^property-/, '').replace(/\.(jpg|jpeg|png|webp|gif)$/i,'');
+      if(d.property_images && d.property_images[key]) p.image=d.property_images[key] + (d.property_images[key].includes('?')?'&':'?') + 'v=' + Date.now();
+    });
     renderProperties();
   }catch(e){ console.warn('Live site settings unavailable',e); }
 }
 applyLiveSite();
+
+// Re-check shortly after load so an uploaded image/video is reflected even when
+// the browser has restored the page from its cache.
+setTimeout(applyLiveSite, 1200);

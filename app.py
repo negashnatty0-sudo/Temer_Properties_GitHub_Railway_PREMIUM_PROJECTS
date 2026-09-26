@@ -142,7 +142,10 @@ def logout():
 
 @app.get('/api/site')
 def api_site():
-    return jsonify(load())
+    response = jsonify(load())
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    return response
 
 @app.get('/<path:path>')
 def files(path):
