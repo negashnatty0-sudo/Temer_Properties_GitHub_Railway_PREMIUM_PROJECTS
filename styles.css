@@ -110,3 +110,8 @@ button,a{touch-action:manipulation}
   .contact-actions{flex-direction:column}
   .contact-actions a{width:100%}
 }
+.hero{position:relative;overflow:hidden;background-size:cover;background-position:center}
+.hero>.live-hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+.hero>.hero-overlay,.hero>.hero-copy,.hero>.agent-card{position:relative;z-index:1}
+.hero>.hero-overlay{z-index:1}
+.hero.has-live-video{background-image:none!important}

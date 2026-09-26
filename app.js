@@ -1,12 +1,11 @@
 const properties = [
-  {price:"ETB 12,500,000", title:"3 Bed Apartment", location:"Bole, Addis Ababa", meta:"3 Beds • 2 Baths • 150 sqm", status:"For Sale", image:"assets/property-bole.jpg"},
-  {price:"ETB 18,000,000", title:"4 Bed Apartment", location:"Kazanchis, Addis Ababa", meta:"4 Beds • 3 Baths • 220 sqm", status:"For Sale", image:"assets/property-kazanchis.jpg"},
-  {price:"ETB 8,500,000", title:"3 Bed House", location:"Ayat, Addis Ababa", meta:"3 Beds • 2 Baths • 180 sqm", status:"For Sale", image:"assets/property-ayat.jpg"},
-  {price:"ETB 65,000 / month", title:"2 Bed Apartment", location:"Bole, Addis Ababa", meta:"2 Beds • 2 Baths • 120 sqm", status:"For Rent", image:"assets/property-cmc.jpg"},
-  {price:"ETB 25,000,000", title:"4 Bed Villa", location:"Summit, Addis Ababa", meta:"4 Beds • 4 Baths • 300 sqm", status:"For Sale", image:"assets/property-summit.jpg"},
-  {price:"ETB 9,800,000", title:"3 Bed Apartment", location:"CMC, Addis Ababa", meta:"3 Beds • 2 Baths • 140 sqm", status:"For Sale", image:"assets/property-kera.jpg"},
-  {price:"ETB 15,000,000", title:"Commercial Space", location:"Kera, Addis Ababa", meta:"180 sqm • Commercial", status:"For Sale", image:"assets/project-sites.jpg"},
-  {price:"ETB 11,900,000", title:"3 Bed Apartment", location:"Megenagna, Addis Ababa", meta:"3 Beds • 2 Baths • 145 sqm", status:"For Sale", image:"assets/project-residence.jpg"}
+  {id:"bole",price:"ETB 12,500,000", title:"3 Bed Apartment", location:"Bole, Addis Ababa", meta:"3 Beds • 2 Baths • 150 sqm", status:"For Sale", image:"assets/property-bole.jpg"},
+  {id:"kazanchis",price:"ETB 18,000,000", title:"4 Bed Apartment", location:"Kazanchis, Addis Ababa", meta:"4 Beds • 3 Baths • 220 sqm", status:"For Sale", image:"assets/property-kazanchis.jpg"},
+  {id:"ayat",price:"ETB 8,500,000", title:"3 Bed House", location:"Ayat, Addis Ababa", meta:"3 Beds • 2 Baths • 180 sqm", status:"For Sale", image:"assets/property-ayat.jpg"},
+  {id:"cmc",price:"ETB 9,800,000", title:"3 Bed Apartment", location:"CMC, Addis Ababa", meta:"3 Beds • 2 Baths • 140 sqm", status:"For Sale", image:"assets/property-cmc.jpg"},
+  {id:"summit",price:"ETB 25,000,000", title:"4 Bed Villa", location:"Summit, Addis Ababa", meta:"4 Beds • 4 Baths • 300 sqm", status:"For Sale", image:"assets/property-summit.jpg"},
+  {id:"kera",price:"ETB 15,000,000", title:"Commercial Space", location:"Kera, Addis Ababa", meta:"180 sqm • Commercial", status:"For Sale", image:"assets/project-sites.jpg"},
+  {id:"megenagna",price:"ETB 11,900,000", title:"3 Bed Apartment", location:"Megenagna, Addis Ababa", meta:"3 Beds • 2 Baths • 145 sqm", status:"For Sale", image:"assets/project-residence.jpg"}
 ];
 
 const tones = {
@@ -68,3 +67,36 @@ function submitContact(e){
   document.getElementById("formMessage").textContent="Message captured. Connect this form to your email/CRM endpoint when you are ready.";
   e.target.reset();
 }
+
+
+async function loadLiveSite(){
+  try{
+    const r=await fetch('/api/site',{cache:'no-store'});
+    if(!r.ok) return;
+    const d=await r.json();
+    if(Array.isArray(d.properties)){
+      d.properties.forEach(lp=>{const p=properties.find(x=>x.id===lp.id); if(p && lp.image) p.image=lp.image;});
+      renderProperties();
+    }
+    const hero=document.querySelector('.hero');
+    if(hero){
+      const old=hero.querySelector('.live-hero-media');
+      if(old) old.remove();
+      if(d.hero_video){
+        const v=document.createElement('video'); v.className='live-hero-media'; v.src=d.hero_video; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('aria-hidden','true');
+        hero.prepend(v); hero.classList.add('has-live-video');
+      }else if(d.hero_image){
+        hero.style.backgroundImage=`url("${d.hero_image}")`; hero.style.backgroundSize='cover'; hero.style.backgroundPosition='center';
+      }
+    }
+    const sales=document.querySelector('.agent-photo img'); if(sales && d.sales_officer_photo) sales.src=d.sales_officer_photo;
+    const meet=document.querySelector('.team-photo img'); if(meet && d.meet_mahlet_photo) meet.src=d.meet_mahlet_photo;
+    const featured=document.querySelector('.featured-project-image img'); if(featured && d.featured_project_photo) featured.src=d.featured_project_photo;
+    document.querySelectorAll('.premium-phone-btn').forEach(a=>{a.href='tel:'+d.phone.replace(/[^+0-9]/g,''); a.textContent='Call Mahlet · '+d.phone;});
+    document.querySelectorAll('.telegram-contact-btn').forEach(a=>{a.href=d.telegram; a.textContent='Telegram · '+d.telegram_user;});
+    const banner=document.querySelector('.diaspora-contact-banner');
+    if(banner){ const h=banner.querySelector('h2'), p=banner.querySelector('p'); if(h) h.textContent=d.investment_message; if(p) p.textContent=d.diaspora_message; }
+  }catch(e){ console.warn('Live site settings unavailable',e); }
+}
+
+loadLiveSite();
