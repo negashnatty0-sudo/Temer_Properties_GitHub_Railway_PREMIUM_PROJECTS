@@ -38,9 +38,9 @@
 <section id="home" class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-copy">
-    <div class="eyebrow">CREATE <span>|</span> CONSTRUCT <span>|</span> DELIVER</div>
-    <h1>Find Your<br>Perfect Property<br><em>in Ethiopia</em></h1>
-    <p>Premium residential and investment properties in prime locations.</p>
+    <div class="eyebrow" data-live="hero_eyebrow">CREATE <span>|</span> CONSTRUCT <span>|</span> DELIVER</div>
+    <h1 data-live="hero_title">Find Your<br>Perfect Property<br><em>in Ethiopia</em></h1>
+    <p data-live="hero_subtitle">Premium residential and investment properties in prime locations.</p>
 
     <div class="search-panel">
       <div class="search-tabs">
@@ -65,10 +65,10 @@
   <div class="agent-card">
     <div class="agent-photo"><img src="assets/mahlet-ademe.jpg" alt="Mahlet Ademe"></div>
     <div class="agent-info">
-      <h2>Mahlet Ademe</h2>
-      <p>Sales Officer</p>
-      <p>Member of: Ajwa Wing</p>
-      <div class="agent-location">📍 Sarbet to Kera Road,<br>Woldemaryam Building</div>
+      <h2 data-live="agent_name">Mahlet Ademe</h2>
+      <p data-live="agent_role">Sales Officer</p>
+      <p data-live="agent_member">Member of: Ajwa Wing</p>
+      <div class="agent-location">📍 <span data-live="agent_location">Sarbet to Kera Road,<br>Woldemaryam Building</span></div>
       <a class="gold-btn" href="#contact">Contact Mahlet</a>
       <div class="quick-links"><a href="https://wa.me/" aria-label="WhatsApp">◉</a><a href="tel:+251900000000">☎</a><a href="mailto:info@temerproperties.com">✉</a></div>
     </div>
@@ -185,22 +185,22 @@
 </section>
 
 <section id="about" class="about section">
-  <div><span class="eyebrow dark">ABOUT TEMER</span><h2>Smart property search built for Ethiopia.</h2><p>Discover homes, apartments, commercial spaces and development opportunities with a clean, modern experience designed around the Ethiopian market.</p><div class="about-stats"><div><b>Prime</b><small>Locations</small></div><div><b>Smart</b><small>Search</small></div><div><b>Local</b><small>Support</small></div></div></div>
+  <div><span class="eyebrow dark">ABOUT TEMER</span><h2 data-live="about_title">Smart property search built for Ethiopia.</h2><p data-live="about_text">Discover homes, apartments, commercial spaces and development opportunities with a clean, modern experience designed around the Ethiopian market.</p><div class="about-stats"><div><b>Prime</b><small>Locations</small></div><div><b>Smart</b><small>Search</small></div><div><b>Local</b><small>Support</small></div></div></div>
   <div class="about-panel"><h3>Need help finding a property?</h3><p>Tell us what you are looking for and our team can help narrow down suitable options.</p><a class="gold-btn" href="#contact">Speak to Temer Properties</a></div>
 </section>
 
 <section id="team" class="agent-section section">
   <div class="team-photo"><img src="assets/mahlet-ademe.jpg" alt="Mahlet Ademe"></div>
-  <div><span class="eyebrow dark">OUR TEAM</span><h2>Meet Mahlet Ademe</h2><h3>Sales Officer • Ajwa Wing</h3><p>Professional and personalised real-estate support for clients looking to buy and explore investment opportunities.</p><ul><li>Residential sales</li><li>Investment opportunities</li><li>Client consultation</li></ul><a class="gold-btn" href="#contact">Contact Mahlet</a></div>
+  <div><span class="eyebrow dark" data-live="team_kicker">OUR TEAM</span><h2 data-live="team_title">Meet Mahlet Ademe</h2><h3 data-live="team_role">Sales Officer • Ajwa Wing</h3><p data-live="team_text">Professional and personalised real-estate support for clients looking to buy and explore investment opportunities.</p><ul><li>Residential sales</li><li>Investment opportunities</li><li>Client consultation</li></ul><a class="gold-btn" href="#contact">Contact Mahlet</a></div>
 </section>
 
 <section id="contact" class="contact section">
-  <div><span class="eyebrow dark">CONTACT</span><h2>Let's find your next property.</h2><p>Our office: Sarbet to Kera Road, Woldemaryam Building, Addis Ababa, Ethiopia.</p><p>Phone: <span data-live-phone>+251 98 363 8578</span><br>Email: info@temerproperties.com</p></div>
+  <div><span class="eyebrow dark">CONTACT</span><h2 data-live="contact_title">Let's find your next property.</h2><p data-live="contact_office">Our office: Sarbet to Kera Road, Woldemaryam Building, Addis Ababa, Ethiopia.</p><p>Phone: <span data-live-phone>+251 98 363 8578</span><br>Email: info@temerproperties.com</p></div>
   <form onsubmit="submitContact(event)">
     <input required placeholder="Full Name" name="name">
     <input required type="email" placeholder="Email Address" name="email">
     <input placeholder="Phone Number" name="phone">
-    <select name="interest"><option>I'm interested in...</option><option>Buying</option><option>Renting</option><option>Off-Plan</option><option>Projects</option></select>
+    <select name="interest"><option>I'm interested in...</option><option>Buying</option><option>Off-Plan</option><option>Projects</option></select>
     <textarea required placeholder="Tell us what you are looking for" name="message"></textarea>
     <button class="gold-btn" type="submit">Send Message</button>
     <p id="formMessage" class="form-message"></p>
@@ -208,7 +208,7 @@
 </section>
 </main>
 
-<footer><div class="brand"><span class="brand-mark">✦</span><span><strong>Temer</strong><small>PROPERTIES</small></span></div><p>CREATE | CONSTRUCT | DELIVER • Ethiopia</p><p>© 2026 Temer Properties</p></footer>
+<footer><div class="brand"><span class="brand-mark">✦</span><span><strong>Temer</strong><small>PROPERTIES</small></span></div><p data-live="footer_line">CREATE | CONSTRUCT | DELIVER • Ethiopia</p><p>© 2026 Temer Properties</p></footer>
 
 <script src="app.js"></script>
 

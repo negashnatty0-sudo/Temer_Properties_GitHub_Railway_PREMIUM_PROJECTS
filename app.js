@@ -1,11 +1,11 @@
 const properties = [
-  {price:"ETB 12,500,000", title:"3 Bed Apartment", location:"Bole, Addis Ababa", meta:"3 Beds • 2 Baths • 150 sqm", status:"For Sale", image:"assets/property-bole.jpg"},
-  {price:"ETB 18,000,000", title:"4 Bed Apartment", location:"Kazanchis, Addis Ababa", meta:"4 Beds • 3 Baths • 220 sqm", status:"For Sale", image:"assets/property-kazanchis.jpg"},
-  {price:"ETB 8,500,000", title:"3 Bed House", location:"Ayat, Addis Ababa", meta:"3 Beds • 2 Baths • 180 sqm", status:"For Sale", image:"assets/property-ayat.jpg"},
-  {price:"ETB 25,000,000", title:"4 Bed Villa", location:"Summit, Addis Ababa", meta:"4 Beds • 4 Baths • 300 sqm", status:"For Sale", image:"assets/property-summit.jpg"},
-  {price:"ETB 9,800,000", title:"3 Bed Apartment", location:"CMC, Addis Ababa", meta:"3 Beds • 2 Baths • 140 sqm", status:"For Sale", image:"assets/property-kera.jpg"},
-  {price:"ETB 15,000,000", title:"Commercial Space", location:"Kera, Addis Ababa", meta:"180 sqm • Commercial", status:"For Sale", image:"assets/project-sites.jpg"},
-  {price:"ETB 11,900,000", title:"3 Bed Apartment", location:"Megenagna, Addis Ababa", meta:"3 Beds • 2 Baths • 145 sqm", status:"For Sale", image:"assets/project-residence.jpg"}
+  {id:"bole",price:"ETB 12,500,000", title:"3 Bed Apartment", location:"Bole, Addis Ababa", meta:"3 Beds • 2 Baths • 150 sqm", status:"For Sale", image:"assets/property-bole.jpg"},
+  {id:"kazanchis",price:"ETB 18,000,000", title:"4 Bed Apartment", location:"Kazanchis, Addis Ababa", meta:"4 Beds • 3 Baths • 220 sqm", status:"For Sale", image:"assets/property-kazanchis.jpg"},
+  {id:"ayat",price:"ETB 8,500,000", title:"3 Bed House", location:"Ayat, Addis Ababa", meta:"3 Beds • 2 Baths • 180 sqm", status:"For Sale", image:"assets/property-ayat.jpg"},
+  {id:"summit",price:"ETB 25,000,000", title:"4 Bed Villa", location:"Summit, Addis Ababa", meta:"4 Beds • 4 Baths • 300 sqm", status:"For Sale", image:"assets/property-summit.jpg"},
+  {id:"cmc",price:"ETB 9,800,000", title:"3 Bed Apartment", location:"CMC, Addis Ababa", meta:"3 Beds • 2 Baths • 140 sqm", status:"For Sale", image:"assets/property-kera.jpg"},
+  {id:"kera",price:"ETB 15,000,000", title:"Commercial Space", location:"Kera, Addis Ababa", meta:"180 sqm • Commercial", status:"For Sale", image:"assets/project-sites.jpg"},
+  {id:"project-residence",price:"ETB 11,900,000", title:"3 Bed Apartment", location:"Megenagna, Addis Ababa", meta:"3 Beds • 2 Baths • 145 sqm", status:"For Sale", image:"assets/project-residence.jpg"}
 ];
 
 const tones = {
@@ -71,50 +71,31 @@ function submitContact(e){
 
 async function applyLiveSite(){
   try{
-    const r=await fetch('/api/site?_=' + Date.now(), {cache:'no-store', headers:{'Cache-Control':'no-cache'}});
-    if(!r.ok) return;
-    const d=await r.json();
-    const cacheBust='?v=' + Date.now();
+    const r=await fetch('/api/site?ts='+Date.now(),{cache:'no-store'}); if(!r.ok)return; const d=await r.json();
+    const bust=u=>u ? (u+(u.includes('?')?'&':'?')+'cb='+Date.now()) : u;
     const hero=document.querySelector('.hero');
     if(hero){
       let v=document.getElementById('heroBackgroundVideo');
       if(d.hero_video){
-        if(!v){
-          v=document.createElement('video');
-          v.id='heroBackgroundVideo';
-          v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true;
-          v.setAttribute('aria-hidden','true');
-          hero.prepend(v);
-        }
-        v.pause();
-        v.src=d.hero_video + (d.hero_video.includes('?')?'&':'?') + 'v=' + Date.now();
-        v.style.display='block';
-        hero.style.backgroundImage='none';
-        v.load();
-        v.play().catch(()=>{});
-      } else {
-        if(v){ v.pause(); v.removeAttribute('src'); v.load(); v.style.display='none'; }
-        hero.style.backgroundImage=`url("${(d.hero_image || 'assets/hero-background.jpg')}${(d.hero_image||'').includes('?')?'&':'?'}v=${Date.now()}")`;
+        if(!v){v=document.createElement('video');v.id='heroBackgroundVideo';v.autoplay=true;v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute('aria-hidden','true');hero.insertBefore(v,hero.firstChild)}
+        v.src=bust(d.hero_video);v.load();v.play().catch(()=>{});v.style.display='block';hero.style.backgroundImage='none';
+      }else{
+        if(v){v.pause();v.remove()}
+        hero.style.backgroundImage=`url("${bust(d.hero_image||'assets/hero-background.jpg')}")`;
       }
     }
-    const setImg=(selector,url)=>{ const el=document.querySelector(selector); if(el&&url) el.src=url+(url.includes('?')?'&':'?')+'v='+Date.now(); };
-    setImg('.agent-photo img',d.sales_officer_image);
-    setImg('.team-photo img',d.meet_mahlet_image);
-    setImg('.featured-project-image img',d.featured_image);
-    document.querySelectorAll('[data-live-phone]').forEach(el=>{el.textContent=d.phone; if(el.tagName==='A') el.href='tel:'+d.phone.replace(/\s/g,'');});
-    document.querySelectorAll('[data-live-telegram]').forEach(el=>{el.textContent=d.telegram_user; if(el.tagName==='A') el.href=d.telegram;});
-    if(d.investment_message){ const el=document.querySelector('[data-investment-message]'); if(el) el.textContent=d.investment_message; }
-    if(d.diaspora_message){ const el=document.querySelector('[data-diaspora-message]'); if(el) el.textContent=d.diaspora_message; }
-    properties.forEach(p=>{
-      const file=(p.image||'').split('/').pop();
-      const key=file.replace(/^property-/, '').replace(/\.(jpg|jpeg|png|webp|gif)$/i,'');
-      if(d.property_images && d.property_images[key]) p.image=d.property_images[key] + (d.property_images[key].includes('?')?'&':'?') + 'v=' + Date.now();
-    });
+    const set=(sel,val)=>{document.querySelectorAll(sel).forEach(el=>{el.textContent=val||''})};
+    Object.entries(d.texts||{}).forEach(([key,val])=>{document.querySelectorAll(`[data-live="${key}"]`).forEach(el=>el.textContent=val||'')});
+    document.querySelectorAll('.agent-photo img').forEach(el=>el.src=bust(d.sales_officer_image));
+    document.querySelectorAll('.team-photo img').forEach(el=>el.src=bust(d.meet_mahlet_image));
+    document.querySelectorAll('.featured-project-image img').forEach(el=>el.src=bust(d.featured_image));
+    document.querySelectorAll('[data-live-phone]').forEach(el=>{el.textContent=d.phone||'';if(el.tagName==='A')el.href='tel:'+(d.phone||'').replace(/\s/g,'')});
+    document.querySelectorAll('[data-live-telegram]').forEach(el=>{el.textContent='Telegram · '+(d.telegram_user||'');if(el.tagName==='A')el.href=d.telegram||'#'});
+    const propMap=new Map((d.properties||[]).map(p=>[p.id,p]));
+    properties.forEach(p=>{const id=p.id||((p.image||'').match(/property-([\w-]+)\./)||[])[1];const live=propMap.get(id);if(live){Object.assign(p,live);p.image=bust(live.image)}});
     renderProperties();
-  }catch(e){ console.warn('Live site settings unavailable',e); }
+    const inv=document.querySelector('.diaspora-contact-banner h2'); if(inv&&d.investment_message)inv.textContent=d.investment_message;
+    const dia=document.querySelector('.diaspora-contact-banner p'); if(dia&&d.diaspora_message)dia.textContent=d.diaspora_message;
+  }catch(e){console.warn('Live site settings unavailable',e)}
 }
-applyLiveSite();
-
-// Re-check shortly after load so an uploaded image/video is reflected even when
-// the browser has restored the page from its cache.
-setTimeout(applyLiveSite, 1200);
+document.addEventListener('DOMContentLoaded',()=>{applyLiveSite();setInterval(applyLiveSite,10000)});
