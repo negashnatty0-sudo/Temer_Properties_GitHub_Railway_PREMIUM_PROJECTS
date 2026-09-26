@@ -64,3 +64,49 @@ footer{background:#052614;color:#d7e4dc;padding:35px clamp(18px,6vw,85px);displa
 .detail-card-top{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--muted);font-size:12px;font-weight:800;margin-bottom:12px}.status-pill{background:#e8f2ea;color:var(--green);border-radius:30px;padding:7px 10px;font-size:10px;letter-spacing:.5px}.detail-project-card h3{font-family:Georgia,serif;color:var(--green);font-size:28px;margin:5px 0}.location-line{color:var(--muted);margin:0 0 14px;font-weight:700}.price-bands.compact{grid-template-columns:1fr;margin:12px 0}.price-bands.compact div{padding:11px}.unit-list{background:#fff;border:1px solid #e4e9e5;border-radius:12px;padding:14px;margin:12px 0}.unit-list h4,.discounts h4{margin:0 0 8px;color:var(--green);font-size:15px}.unit-list p{margin:7px 0;color:#56645b;font-size:13px;line-height:1.5}.payment-box.light{background:#edf5ee;color:var(--ink);border:1px solid #dbe8dc}.payment-box.light h4{margin:0;color:var(--green)}.payment-box.light p{color:#536057}.detail-project-card .gold-btn{width:100%;text-align:center;margin-top:4px}.shops-section{background:#062b18}.shops-card{background:linear-gradient(135deg,#0a3d20,#124e2a);color:#fff;border:1px solid rgba(217,169,46,.45);border-radius:24px;padding:38px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:center}.shops-card h2{color:#fff;margin-bottom:8px}.shops-card p{color:#d5e3d9;line-height:1.6}.shop-locations{display:grid;gap:10px}.shop-locations span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:13px 15px;color:#fff;font-weight:700}.shop-price{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:15px}.shop-price>div{background:#fff;color:var(--green);border-radius:14px;padding:18px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.shop-price small{color:var(--muted);font-weight:700}.shop-price strong{font-family:Georgia,serif;font-size:25px}.shops-card>.gold-btn{justify-self:start}
 @media(max-width:1050px){.details-grid{grid-template-columns:1fr 1fr}.shops-card{grid-template-columns:1fr}.shop-price{grid-column:auto}}
 @media(max-width:760px){.details-grid{grid-template-columns:1fr}.shops-card{padding:25px 18px}.shop-price{grid-template-columns:1fr}.shops-card>.gold-btn{width:100%;text-align:center}}
+
+/* TEMER PREMIUM EUROPEAN-STYLE POLISH */
+:root{
+  --temer-green:#0b3d2e;
+  --temer-green-2:#123f34;
+  --temer-gold:#c9a227;
+  --temer-cream:#f7f5ef;
+  --temer-ink:#13221d;
+  --temer-muted:#64736c;
+  --temer-white:#fff;
+  --temer-radius:22px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--temer-cream);color:var(--temer-ink);-webkit-font-smoothing:antialiased}
+a,button{transition:transform .2s ease,box-shadow .2s ease,background .2s ease,color .2s ease,border-color .2s ease}
+button,a{touch-action:manipulation}
+.telegram-contact-btn,.premium-phone-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  min-height:48px;padding:.8rem 1.15rem;border-radius:999px;
+  text-decoration:none;font-weight:750;letter-spacing:.01em;
+}
+.telegram-contact-btn{background:#229ed9;color:#fff;box-shadow:0 10px 28px rgba(34,158,217,.22)}
+.premium-phone-btn{background:var(--temer-gold);color:#14231d;box-shadow:0 10px 28px rgba(201,162,39,.22)}
+.telegram-contact-btn:hover,.premium-phone-btn:hover{transform:translateY(-2px)}
+.diaspora-contact-banner{
+  position:relative;overflow:hidden;margin:3rem auto;padding:clamp(2rem,5vw,4rem);
+  max-width:1200px;border-radius:28px;
+  background:linear-gradient(135deg,#082d23 0%,#0e4a38 58%,#12382e 100%);
+  color:#fff;border:1px solid rgba(201,162,39,.32);
+  box-shadow:0 25px 70px rgba(7,36,28,.2);
+}
+.diaspora-contact-banner:after{
+  content:"";position:absolute;width:280px;height:280px;border-radius:50%;
+  right:-100px;top:-120px;border:1px solid rgba(201,162,39,.18);
+  box-shadow:0 0 0 35px rgba(201,162,39,.05),0 0 0 70px rgba(201,162,39,.03);
+}
+.diaspora-contact-banner>*{position:relative;z-index:1}
+.contact-kicker{font-size:.78rem;letter-spacing:.18em;color:#e0c45a;font-weight:800;margin-bottom:.7rem}
+.diaspora-contact-banner h2{max-width:760px;margin:0 0 .8rem;font-size:clamp(1.7rem,4vw,3rem);line-height:1.08}
+.diaspora-contact-banner p{font-size:1.05rem;opacity:.9;margin:.35rem 0 1.3rem}
+.contact-actions{display:flex;flex-wrap:wrap;gap:.75rem}
+@media(max-width:700px){
+  .diaspora-contact-banner{margin:2rem 1rem;border-radius:20px}
+  .contact-actions{flex-direction:column}
+  .contact-actions a{width:100%}
+}
